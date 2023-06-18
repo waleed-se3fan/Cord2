@@ -19,7 +19,7 @@ class HomeCubit extends Cubit<HomeState> {
   static String tvoice =
       'https://coqui-prod-creator-app-synthesized-samples.s3.amazonaws.com/samples/fc0b3fb0-8344-428d-9775-c9a3e95febfb.wav';
 
-  static int t = 0;
+  static int t = 1;
   chgtooggle(x) {
     toggle = x;
     emit(chgToggleState());

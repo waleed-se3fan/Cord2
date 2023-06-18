@@ -40,171 +40,178 @@ class HomeScreen extends StatelessWidget {
                             body: Padding(
                               padding: EdgeInsets.symmetric(
                                   horizontal: 10.w, vertical: 40),
-                              child: Column(
-                                children: [
-                                  ToggleSwitch(
-                                    minHeight: 45.h,
-                                    customWidths: [
-                                      MediaQuery.of(context).size.width / 2.3,
-                                      MediaQuery.of(context).size.width / 2.3
-                                    ],
-                                    inactiveBgColor:
-                                        Color.fromRGBO(224, 224, 224, 1),
-                                    initialLabelIndex: HomeCubit.t,
-                                    totalSwitches: 2,
-                                    labels: ['Your Voice', 'Auto Voice'],
-                                    onToggle: (index) {
-                                      bool z;
-                                      index == 0 ? z = true : z = false;
-                                      print('switched to: $z');
-                                      cubit.chgtooggle(z);
-                                      index == 0
-                                          ? HomeCubit.t = 0
-                                          : HomeCubit.t = 1;
-                                    },
-                                  ),
-                                  const SizedBox(
-                                    height: 30,
-                                  ),
-                                  // Switch(
-                                  //     value: HomeCubit.toggle,
-                                  //     onChanged: (x) {
-                                  //       cubit.chgToggle(x);
-                                  //     }),
-                                  CustomContainer(
-                                      child: Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: 10.h, horizontal: 10.w),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Start Speak, We hear you',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 15.sp),
-                                        ),
-                                        SizedBox(
-                                          height: 15.h,
-                                        ),
-                                        if (cubit.isRecording) ...{
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: List<Widget>.generate(
-                                                20,
-                                                (index) => VisualComponent(
-                                                      duration: cubit
-                                                          .duration[index % 5],
-                                                    )),
-                                          )
-                                        } else ...{
-                                          Opacity(
-                                            opacity: 0.5,
-                                            child: Row(
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    ToggleSwitch(
+                                      minHeight: 45.h,
+                                      customWidths: [
+                                        MediaQuery.of(context).size.width / 2.3,
+                                        MediaQuery.of(context).size.width / 2.3
+                                      ],
+                                      inactiveBgColor:
+                                          Color.fromRGBO(224, 224, 224, 1),
+                                      initialLabelIndex: HomeCubit.t,
+                                      totalSwitches: 2,
+                                      labels: ['Your Voice', 'Auto Voice'],
+                                      onToggle: (index) {
+                                        bool z;
+                                        index == 0 ? z = true : z = false;
+                                        print('switched to: $z');
+                                        cubit.chgtooggle(z);
+                                        index == 0
+                                            ? HomeCubit.t = 0
+                                            : HomeCubit.t = 1;
+                                      },
+                                    ),
+                                    const SizedBox(
+                                      height: 30,
+                                    ),
+                                    // Switch(
+                                    //     value: HomeCubit.toggle,
+                                    //     onChanged: (x) {
+                                    //       cubit.chgToggle(x);
+                                    //     }),
+                                    CustomContainer(
+                                        child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 10.h, horizontal: 10.w),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Start Speak, We hear you',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 15.sp),
+                                          ),
+                                          SizedBox(
+                                            height: 15.h,
+                                          ),
+                                          if (cubit.isRecording) ...{
+                                            Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.spaceEvenly,
-                                              children: List.generate(
-                                                20,
-                                                (index) => Container(
-                                                  width: 8.w,
-                                                  height: cubit
-                                                      .height[index % 10].h,
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.white,
-                                                    gradient:
-                                                        AppColors.animGradient,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
+                                              children: List<Widget>.generate(
+                                                  20,
+                                                  (index) => VisualComponent(
+                                                        duration:
+                                                            cubit.duration[
+                                                                index % 5],
+                                                      )),
+                                            )
+                                          } else ...{
+                                            Opacity(
+                                              opacity: 0.5,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: List.generate(
+                                                  20,
+                                                  (index) => Container(
+                                                    width: 8.w,
+                                                    height: cubit
+                                                        .height[index % 10].h,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      gradient: AppColors
+                                                          .animGradient,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                    ),
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                          )
-                                        }
-                                      ],
+                                            )
+                                          }
+                                        ],
+                                      ),
+                                    )),
+                                    SizedBox(
+                                      height: 10.h,
                                     ),
-                                  )),
-                                  SizedBox(
-                                    height: 10.h,
-                                  ),
-                                  AnimatedSize(
-                                    duration: const Duration(milliseconds: 400),
-                                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                                    child: Visibility(
-                                      visible: cubit.isRecording,
-                                      child: CustomContainer(
-                                          child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            vertical: 10.h, horizontal: 10.w),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'You said:',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 15.sp),
-                                            ),
-                                            //TyperAnimatedText
+                                    AnimatedSize(
+                                      duration:
+                                          const Duration(milliseconds: 400),
+                                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                                      child: Visibility(
+                                        visible: cubit.isRecording,
+                                        child: CustomContainer(
+                                            child: Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 10.h, horizontal: 10.w),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'You said:',
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w500,
+                                                    fontSize: 15.sp),
+                                              ),
+                                              //TyperAnimatedText
 
-                                            FutureBuilder(
-                                                future: cubit.getTextData(),
-                                                builder: (c, s) {
-                                                  return Container(
-                                                    alignment: s.data == null
-                                                        ? Alignment.bottomCenter
-                                                        : Alignment.topLeft,
-                                                    child: AnimatedTextKit(
-                                                      repeatForever: false,
-                                                      isRepeatingAnimation:
-                                                          false,
-                                                      totalRepeatCount: 1,
-                                                      animatedTexts: [
-                                                        TyperAnimatedText(HomeCubit
-                                                                .toggle
-                                                            ? HomeCubit.tdata
-                                                            : HomeCubit
-                                                                .translatedText),
-                                                      ],
-                                                    ),
-                                                  );
-                                                })
-                                          ],
-                                        ),
-                                      )),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 15.h,
-                                  ),
-                                  if (cubit.isRecording) ...{
-                                    StopButton(
-                                      onPressed: () {
-                                        cubit.stopRecord();
-                                        cubit.stoptts();
-                                      },
-                                    ),
-                                  } else ...{
-                                    Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 25.w),
-                                        child: GradientButton(
-                                          height: 45.h,
-                                          onPressed: () async {
-                                            cubit.startRecord();
-                                            await cubit.tts();
-
-                                            await cubit
-                                                .translate(HomeCubit.type);
-                                          },
-                                          title: 'Start',
+                                              FutureBuilder(
+                                                  future: cubit.getTextData(),
+                                                  builder: (c, s) {
+                                                    return Container(
+                                                      alignment: s.data == null
+                                                          ? Alignment
+                                                              .bottomCenter
+                                                          : Alignment.topLeft,
+                                                      child: AnimatedTextKit(
+                                                        repeatForever: false,
+                                                        isRepeatingAnimation:
+                                                            false,
+                                                        totalRepeatCount: 1,
+                                                        animatedTexts: [
+                                                          TyperAnimatedText(
+                                                              HomeCubit.toggle
+                                                                  ? HomeCubit
+                                                                      .tdata
+                                                                  : HomeCubit
+                                                                      .translatedText),
+                                                        ],
+                                                      ),
+                                                    );
+                                                  })
+                                            ],
+                                          ),
                                         )),
-                                  },
-                                ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 15.h,
+                                    ),
+                                    if (cubit.isRecording) ...{
+                                      StopButton(
+                                        onPressed: () {
+                                          cubit.stopRecord();
+                                          cubit.stoptts();
+                                        },
+                                      ),
+                                    } else ...{
+                                      Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 25.w),
+                                          child: GradientButton(
+                                            height: 45.h,
+                                            onPressed: () async {
+                                              cubit.startRecord();
+                                              await cubit.tts();
+
+                                              await cubit
+                                                  .translate(HomeCubit.type);
+                                            },
+                                            title: 'Start',
+                                          )),
+                                    },
+                                  ],
+                                ),
                               ),
                             ),
                           );
