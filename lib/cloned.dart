@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/styles/colors.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:file_picker/file_picker.dart';
 
 class ClonedVoiceScreen extends StatelessWidget {
   const ClonedVoiceScreen();
@@ -41,15 +42,15 @@ class ClonedVoiceScreen extends StatelessWidget {
                             child: InkWell(
                               onTap: () async {
                                 // AudioPicker.pickAudio();
-                                // FilePickerResult? result =
-                                //     await FilePicker.platform.pickFiles();
-                                // if (result == null) {
-                                //   print(
-                                //     "No file selected",
-                                //   );
-                                // } else {
-                                //   print(result.files.single.name);
-                                // }
+                                FilePickerResult? result =
+                                    await FilePicker.platform.pickFiles();
+                                if (result == null) {
+                                  print(
+                                    "No file selected",
+                                  );
+                                } else {
+                                  print(result.files.single.name);
+                                }
                               },
                               child: DottedBorder(
                                 dashPattern: [5, 5],

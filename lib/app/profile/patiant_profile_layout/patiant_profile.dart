@@ -26,7 +26,8 @@ class PatiantProfile extends StatelessWidget {
               return Scaffold(
                 appBar: HomeAssistentAppBar('Profile'),
                 body: Container(
-                  padding: EdgeInsets.only(bottom: 120, left: 15, right: 15),
+                  padding: EdgeInsets.only(
+                      bottom: 120, left: 15, right: 15, top: 20),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -56,15 +57,18 @@ class PatiantProfile extends StatelessWidget {
                               style: TextStyle(),
                             );
                           }),
-                      GradientButton(
-                        height: 45.h,
-                        onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (c) {
-                            return EditProfile();
-                          }));
-                        },
-                        title: 'Edit Profile',
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20),
+                        child: GradientButton(
+                          height: 45.h,
+                          onPressed: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (c) {
+                              return EditProfile();
+                            }));
+                          },
+                          title: 'Edit Profile',
+                        ),
                       ),
                       ListView.builder(
                           shrinkWrap: true,

@@ -63,7 +63,7 @@ dependencies:
   cloud_firestore: 
   dotted_border: ^2.0.0+3
   image_picker: 
- # file_picker: 
+  file_picker: 
   #audio_picker:
    
 
