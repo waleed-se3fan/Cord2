@@ -66,7 +66,8 @@ class _DialogState extends State<_Dialog> {
                     'Spanish',
                     'French',
                     'German',
-                    'Italian'
+                    'Italian',
+                    'Arabic'
                   ].map((e) => Column(
                         children: [
                           InkWell(
@@ -96,6 +97,10 @@ class _DialogState extends State<_Dialog> {
                                 case 'German':
                                   {
                                     HomeCubit.type = 'de';
+                                  }
+                                  case 'Arabic':
+                                  {
+                                    HomeCubit.type = 'ar';
                                   }
                                   break;
                               }
